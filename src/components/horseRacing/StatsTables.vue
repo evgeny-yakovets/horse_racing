@@ -9,7 +9,7 @@ const store = useStore()
 		<div class="text-center bg-blue common-border">Program</div>
 		<template v-for="lapProgram in store.getters.getLapProgram">
 			<div class="bg-red">
-				{{store.getters.getLapNumber + 'st Lap - ' + store.getters.getLapLength(lapProgram.lapNumber) + 'm'}}
+				{{lapProgram.lapNumber + 'st Lap - ' + store.getters.getLapLength(lapProgram.lapNumber) + 'm'}}
 			</div>
 			<table>
 				<thead>
@@ -32,7 +32,7 @@ const store = useStore()
 		<template v-for="lapResults in store.getters.getLapResults">
 			<template v-if="lapResults.horses.length > 0">
 				<div class="bg-red">
-					{{store.getters.getLapNumber + 'st Lap - ' + store.getters.getLapLength(lapResults.lapNumber) + 'm'}}
+					{{lapResults.lapNumber + 'st Lap - ' + store.getters.getLapLength(lapResults.lapNumber) + 'm'}}
 				</div>
 				<table>
 					<thead>
