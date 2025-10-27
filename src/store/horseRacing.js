@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import {generateHorseNames, getRandomColors, getRandomInt} from "@/helpers/horseRacingHelper.js";
+import {generateHorseNames, getRandomColors, getRandomInt} from "@/helpers/horseRacingHelper.ts";
 
 const TOTAL_HORSES = 20
 const TOTAL_LAPS = 6

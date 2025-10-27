@@ -2,6 +2,7 @@
   "name": "horserace",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://evgeny-yakovets.github.io/horse_racing/",
   "type": "module",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
@@ -13,7 +14,9 @@
     "test:unit": "vitest",
     "test:e2e": "playwright test",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.15",
@@ -29,6 +32,7 @@
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
+    "gh-pages": "^6.3.0",
     "jsdom": "^27.0.1",
     "npm-run-all2": "^8.0.4",
     "typescript": "~5.9.0",

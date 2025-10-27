@@ -1,9 +1,9 @@
 
-export const getRandomInt = (min, max) => {
+export const getRandomInt = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export const generateHorseNames = (count) => {
+export const generateHorseNames = (count: number) => {
     const horseNames = [
         'Thunderbolt', 'Shadowfax', 'Blaze', 'Spirit', 'Midnight', 'Storm', 'Aurora', 'Raven',
         'Comet', 'Whisper', 'Lightning', 'Dusty', 'Nova', 'Falcon', 'Sapphire', 'Phoenix',
@@ -13,7 +13,7 @@ export const generateHorseNames = (count) => {
     return horseNames.sort(() => Math.random() - 0.5).slice(0, count)
 }
 
-export const getRandomColors = (count) => {
+export const getRandomColors = (count: number) => {
     const colorPalette = [
         'red', 'green', 'blue', 'orange', 'purple', 'yellow', 'pink', 'brown',
         'gray', 'black', 'teal', 'magenta', 'indigo',

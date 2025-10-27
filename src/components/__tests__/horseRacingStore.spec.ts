@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { store } from '@/store/horseRacing.js'
-import { generateHorseNames, getRandomColors, getRandomInt } from '@/helpers/horseRacingHelper.js'
+import { generateHorseNames, getRandomColors, getRandomInt } from '@/helpers/horseRacingHelper.ts'
 
 // mock helpers to return expected results
-vi.mock('@/helpers/horseRacingHelper.js', () => ({
+vi.mock('@/helpers/horseRacingHelper.ts', () => ({
     generateHorseNames: vi.fn(() => Array.from({ length: 20 }, (_, i) => `Horse${i + 1}`)),
     getRandomColors: vi.fn(() => Array.from({ length: 20 }, (_, i) => `Color${i + 1}`)),
     getRandomInt: vi.fn(() => 50), //50 for better distance testing
