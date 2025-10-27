@@ -8,7 +8,6 @@ const TICK_INTERVAL = 100
 
 
 const state = {
-    count: 0,
     isRacingInProcess: false,
     racing: null,
     horseList: [],
@@ -79,34 +78,48 @@ const mutations = {
     updateLapProgress(state) {
         if (!state.isRacingInProcess) return
 
-        const currentLap = state.lapProgram.find(l => l.lapNumber === state.lapNumber)
+        const currentLap = state.lapProgram.find(lap => lap.lapNumber === state.lapNumber)
         if (!currentLap) return
 
         const lapDistance = state.lapsLength[state.lapNumber]
-        const currentResults = state.lapResults.find(r => r.lapNumber === state.lapNumber)
+        const currentResults = state.lapResults.find(lap => lap.lapNumber === state.lapNumber)
 
         for (const horse of currentLap.horses) {
             if (horse.finished) continue
 
-            const horseData = state.horseList.find(h => h.horseIndex === horse.horseIndex)
+            const horseData = state.horseList.find(horseFromList => horseFromList.horseIndex === horse.horseIndex)
             if (!horseData) continue
 
             horse.distanceProgress += horseData.condition
+        }
 
+        let finishedHorses = []
+        for (const horse of currentLap.horses) {
             if (horse.distanceProgress >= lapDistance) {
                 horse.distanceProgress = lapDistance
                 horse.finished = true
 
-                if (!currentResults.horses.some(h => h.horseIndex === horse.horseIndex)) {
-                    currentResults.horses.push({
+                if (!finishedHorses.some(finishedHorse => finishedHorse.horseIndex === horse.horseIndex)) {
+                    finishedHorses.push({
+                        distanceProgress: horse.distanceProgress,
                         horseIndex: horse.horseIndex,
-                        position: currentResults.horses.length + 1,
                     })
                 }
             }
         }
 
-        const allFinished = currentLap.horses.every(h => h.finished)
+        finishedHorses.sort((a, b) => b.distanceProgress - a.distanceProgress)
+
+        for (const finishedHorse of finishedHorses) {
+            if (!currentResults.horses.some(horseFromResults => horseFromResults.horseIndex === finishedHorse.horseIndex)) {
+                currentResults.horses.push({
+                    horseIndex: finishedHorse.horseIndex,
+                    position: currentResults.horses.length + 1,
+                })
+            }
+        }
+
+        const allFinished = currentLap.horses.every(currentLapHorse => currentLapHorse.finished)
         if (allFinished) {
             if (state.lapNumber < TOTAL_LAPS) {
                 state.lapNumber++
@@ -154,6 +167,15 @@ const getters = {
     getLapLength: (state) => (lapNumber) => state.lapsLength[lapNumber],
     getHorseName: (state) => (horseIndex) => {
         return state.horseList[horseIndex].name
+    },
+    getHorseColor: (state) => (horseIndex) => {
+        return state.horseList[horseIndex].color
+    },
+    getCurrentLapHorseResult: (state) => (horseIndex) => {
+        if(state.lapResults[state.lapNumber-1].horses.length === 0) return null
+        const horseResult = state.lapResults[state.lapNumber-1].horses.find(horse => horse.horseIndex === horseIndex)
+
+        return horseResult ? horseResult.position : null
     },
 }
 

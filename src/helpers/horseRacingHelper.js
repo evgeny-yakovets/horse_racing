@@ -16,7 +16,7 @@ export const generateHorseNames = (count) => {
 export const getRandomColors = (count) => {
     const colorPalette = [
         'red', 'green', 'blue', 'orange', 'purple', 'yellow', 'pink', 'brown',
-        'gray', 'black', 'teal', 'cyan', 'magenta', 'lime', 'indigo', 'gold',
+        'gray', 'black', 'teal', 'magenta', 'indigo',
         'silver', 'navy', 'violet', 'maroon', 'olive', 'coral', 'turquoise',
         'crimson', 'khaki', 'plum', 'salmon', 'tan', 'orchid', 'chocolate',
     ]

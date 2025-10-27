@@ -12,20 +12,21 @@ const lapInformation = computed(() => {
 
 <template>
 <div class="w-[100%] px-[40px]">
-	<div class="racing-roads pr-[46px] relative flex flex-col">
+	<div class="racing-roads pr-[46px] relative flex flex-col" data-testid="racingRoads">
 		<HorseRoadItem v-for="(horse, index) in store.getters.getCurrentLapProgram"
 		               :index="index+1"
 		               :horseName="store.state.horseList[horse.horseIndex].name"
 		               :horseColor="store.state.horseList[horse.horseIndex].color"
 		               :distanceProgress="horse.distanceProgress/store.getters.getLapLength(store.getters.getLapNumber) * 100"
+		               :position="store.getters.getCurrentLapHorseResult(horse.horseIndex)"
 		/>
 
-		<div class="absolute right-[-25px] bottom-[-25px] text-red">
+		<div data-testid="roadsFinishLabel" class="absolute right-[-25px] bottom-[-25px] text-red">
 			FINISH
 		</div>
 	</div>
 
-	<div class="flex justify-center text-red">
+	<div data-testid="roadsLapInformation" class="flex justify-center text-red">
 		{{lapInformation}}
 	</div>
 </div>
